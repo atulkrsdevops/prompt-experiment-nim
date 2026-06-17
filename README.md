@@ -41,6 +41,7 @@ few_shot           5/5      921
 chain_of_thought   5/5      1243
 ```
 
+![Demo: ](docs/screenshots/Prompt.png)
 ---
 
 ## Results
