@@ -26,39 +26,34 @@ Evaluation & Alignment.
 
 ## Demo
 
-```text
-$ python -m src.run --experiment experiments/classification.json
+![Experiment runs and reporter output](docs/screenshots/results.jpg)
 
-Running experiment: sentiment_classification
-Model: meta/llama-3.1-8b-instruct
-Strategies: zero_shot, few_shot, chain_of_thought
-Samples: 5
-
-strategy           score    avg_latency_ms
------------------  -------  ----------------
-zero_shot          3/5      843
-few_shot           5/5      921
-chain_of_thought   5/5      1243
-```
-
-![Demo: ](docs/screenshots/Prompt.png)
 ---
 
 ## Results
 
-```text
-Experiment: sentiment_classification
-zero_shot        : 3/5  (60%)  avg 843ms
-few_shot         : 5/5  (100%) avg 921ms
-chain_of_thought : 5/5  (100%) avg 1243ms
+### sentiment_classification
 
-Experiment: question_answering
-zero_shot        : 4/5  (80%)  avg 761ms
-few_shot         : 5/5  (100%) avg 889ms
-chain_of_thought : 5/5  (100%) avg 1311ms
+```text
+strategy           score    accuracy    avg_latency_ms
+-----------------  -------  ----------  ----------------
+zero_shot          5/5      100%        1016ms
+few_shot           5/5      100%        787ms
+chain_of_thought   5/5      100%        890ms
 ```
 
-**Key finding:** Few-shot matches CoT accuracy at lower latency — optimal
+### question_answering
+
+```text
+strategy           score    accuracy    avg_latency_ms
+-----------------  -------  ----------  ----------------
+zero_shot          5/5      100%        1107ms
+few_shot           5/5      100%        985ms
+chain_of_thought   5/5      100%        985ms
+```
+
+**Key finding:** Few-shot matches chain-of-thought accuracy at lower latency on
+both tasks. CoT adds 100-300ms overhead with no accuracy gain here — optimal
 strategy depends on task type and latency budget.
 
 ---
@@ -71,8 +66,53 @@ copy .env.example .env
 pip install -r requirements.txt
 python -m src.run --experiment experiments/classification.json
 python -m src.run --experiment experiments/qa.json
-python -m src.report
+python -m src.reporter
+
+# Mac/Linux
+cp .env.example .env
+make setup
+make run-classification
+make run-qa
+make report
 ```
+
+---
+
+## Adding your own experiment
+
+Create a JSON file in `experiments/` following this structure:
+
+```json
+{
+  "name": "my_task",
+  "system_prompt": "Your task instruction here.",
+  "examples": [
+    { "input": "example input", "output": "example output" }
+  ],
+  "samples": [
+    { "input": "test input", "expected": "expected answer" }
+  ]
+}
+```
+
+Then run:
+
+```bash
+python -m src.run --experiment experiments/my_task.json
+```
+
+---
+
+## How it maps to the exam blueprints
+
+| Component | File | NCA-GENL domain |
+|---|---|---|
+| Zero-shot / few-shot / CoT builders | `src/prompts.py` | Prompt engineering |
+| Experiment runner | `src/run.py` | Experiment design |
+| LLM-as-judge scorer | `src/scorer.py` | Evaluation |
+| Reporter with comparison table | `src/reporter.py` | Data analysis |
+| JSON experiment definitions | `experiments/` | Reproducibility |
+| CI pipeline | `.github/workflows/` | Software development |
 
 ---
 
