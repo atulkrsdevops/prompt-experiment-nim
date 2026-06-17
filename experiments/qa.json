@@ -1,0 +1,36 @@
+{
+  "name": "question_answering",
+  "system_prompt": "Answer the following question concisely and accurately in one sentence.",
+  "examples": [
+    {
+      "input": "What is the capital of France?",
+      "output": "The capital of France is Paris."
+    },
+    {
+      "input": "How many days are in a leap year?",
+      "output": "A leap year has 366 days."
+    }
+  ],
+  "samples": [
+    {
+      "input": "What is the boiling point of water at sea level in Celsius?",
+      "expected": "100 degrees Celsius"
+    },
+    {
+      "input": "How many continents are there on Earth?",
+      "expected": "7 continents"
+    },
+    {
+      "input": "What gas do plants absorb during photosynthesis?",
+      "expected": "Carbon dioxide"
+    },
+    {
+      "input": "What is the chemical symbol for gold?",
+      "expected": "Au"
+    },
+    {
+      "input": "How many hours are in a week?",
+      "expected": "168 hours"
+    }
+  ]
+}

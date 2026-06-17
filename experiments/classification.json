@@ -1,0 +1,40 @@
+{
+  "name": "sentiment_classification",
+  "system_prompt": "Classify the sentiment of the following text as exactly one of: positive, negative, or neutral. Reply with only the label.",
+  "examples": [
+    {
+      "input": "The product arrived on time and works perfectly.",
+      "output": "positive"
+    },
+    {
+      "input": "The package was damaged and customer support was unhelpful.",
+      "output": "negative"
+    },
+    {
+      "input": "The item was delivered.",
+      "output": "neutral"
+    }
+  ],
+  "samples": [
+    {
+      "input": "I absolutely love this product, it exceeded all my expectations!",
+      "expected": "positive"
+    },
+    {
+      "input": "Terrible experience, the product broke after one day.",
+      "expected": "negative"
+    },
+    {
+      "input": "The order was processed on Tuesday.",
+      "expected": "neutral"
+    },
+    {
+      "input": "Best purchase I've made all year, highly recommend!",
+      "expected": "positive"
+    },
+    {
+      "input": "Very disappointed, nothing like what was advertised.",
+      "expected": "negative"
+    }
+  ]
+}
