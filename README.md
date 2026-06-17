@@ -26,7 +26,7 @@ Evaluation & Alignment.
 
 ## Demo
 
-![Experiment runs and reporter output](docs/screenshots/results.jpg)
+![Experiment runs and reporter output](docs/screenshots/Prompt.png)
 
 ---
 
